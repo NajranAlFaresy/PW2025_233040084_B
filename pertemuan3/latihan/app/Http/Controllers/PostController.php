@@ -13,4 +13,12 @@ class PostController extends Controller
         return view('posts', compact('posts'));
 
     }
+
+    // Route Model Binding untuk single post page
+    public function show(Post $post)
+    {
+        // Menggunakan with() untuk mengatasi N+1 Prooblem
+        $post->load(['author', 'category']);
+        return view('posts', compact('post'));
+    }
 }

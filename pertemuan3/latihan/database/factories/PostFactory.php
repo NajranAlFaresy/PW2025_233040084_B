@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
@@ -21,13 +20,13 @@ class PostFactory extends Factory
         $title = fake()->sentence(4);
 
         return [
-            'user_id' => \App\Models\User::factory(),
+            'user_id'     => \App\Models\User::factory(),
             'category_id' => \App\Models\Category::inRandomOrder()->first()->id,
-            'title' => $title,
-            'slug' => Str::slug($title),
-            'excerpt' => fake()->paragraph(),
-            'body' => fake()->paragraph(3, true),
-            'image' => null, 
+            'title'       => $title,
+            'slug'        => Str::slug($title),
+            'excerpt'     => fake()->paragraph(),
+            'body'        => fake()->paragraphs(3, true),
+            'image'       => null,
         ];
     }
 }

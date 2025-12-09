@@ -24,4 +24,4 @@ class UserFactory extends Factory
             'password' => Hash::make('password'), // default password
         ];
     }
-}
+}   

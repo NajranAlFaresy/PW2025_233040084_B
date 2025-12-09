@@ -14,7 +14,7 @@ class Post extends Model
     // Melindungi kolom 'id' dari mass assignment, kolom lain bebas diisi
     protected $guarded = ['id'];
 
-    // Eager loading: Otomatis load relasi author dan category saat query Post
+    // Eager loading (Otomatis load relasi author dan category saat query Post)
     protected $with = ['author', 'category'];
 
     // Relasi Many-to-One: Post ditulis oleh satu User (author)
@@ -33,32 +33,29 @@ class Post extends Model
         // Contoh: $post->category->name
     }
 
-    // Query Scope: Filter pencarian berdasarkan search, category, atau author
+    // Query Scope: filter pencarian berdasarkan search, category, atau author
     public function scopeFilter(Builder $query, array $filters): void
     {
         // Filter berdasarkan judul (search)
         $query->when(
             $filters['search'] ?? false,
-            fn($query, $search) =>
-                $query->where('title', 'like', '%' . $search . '%')
+            fn($query, $search) => $query->where('title', 'like', '%' . $search . '%')
         );
 
         // Filter berdasarkan slug category
         $query->when(
             $filters['category'] ?? false,
-            fn($query, $category) =>
-                $query->whereHas('category', fn($query) =>
-                    $query->where('slug', $category)
-                )
+            fn($query, $category) => $query->whereHas('category', fn($query) =>
+                $query->where('slug', $category)
+            )
         );
 
         // Filter berdasarkan username author
         $query->when(
             $filters['author'] ?? false,
-            fn($query, $author) =>
-                $query->whereHas('author', fn($query) =>
-                    $query->where('username', $author)
-                )
+            fn($query, $author) => $query->whereHas('author', fn($query) =>
+                $query->where('username', $author)
+            )
         );
     }
 }

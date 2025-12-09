@@ -1,15 +1,11 @@
-<x-layout :title="'All Categories'">
+<x-layout>
+    <x-slot:title>Categories</x-slot:title>
 
-    <h2>Daftar Semua Kategori</h2>
+    <h1>Daftar Kategori</h1>
 
     <ul>
         @foreach ($categories as $category)
-            <li>
-                <a href="/categories/{{ $category->slug }}">
-                    {{ $category->name }}
-                </a>
-            </li>
+            <li>{{ $category->name }}</li>
         @endforeach
     </ul>
-
 </x-layout>
